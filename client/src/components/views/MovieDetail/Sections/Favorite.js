@@ -1,10 +1,10 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { Button } from 'antd';
 
 function Favorite(props) {
 
-    const moiveId = props.movieId
+    const movieId = props.movieId
     const userFrom = props.userFrom
     const movieTitle = props.movieInfo.title
     const moviePost = props.movieInfo.backdrop_path
@@ -12,13 +12,13 @@ function Favorite(props) {
 
     const [FavoriteNumber, setFavoriteNumber] = useState(0)
     const [Favorited, setFavorited] = useState(false)
-    
-    let variables= {
-        userFrom : userFrom,
-        movieId : moiveId,
-        movieTitle : movieTitle,
-        moviePost : moviePost,
-        movieRunTime : movieRunTime
+
+    let variables = {
+        userFrom: userFrom,
+        movieId: movieId,
+        movieTitle: movieTitle,
+        moviePost: moviePost,
+        movieRunTime: movieRunTime
     }
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function Favorite(props) {
         Axios.post('/api/favorite/favoriteNumber',variables)
             .then(response => {
                 if(response.data.success){
-                    //console.log(response.data)
+                    //console.log(response.data.favoriteNumber)
                     setFavoriteNumber(response.data.favoriteNumber)
                 }else{
                     alert('정보를 가져오는데 실패 했습니다')
@@ -64,7 +64,6 @@ function Favorite(props) {
                     if(response.data.success){
                         setFavoriteNumber(FavoriteNumber + 1)
                         setFavorited(!Favorited)
-                        console.log(Favorited)
                     } else{
                         alert('Favorite 리스트에 등록하는 것을 실패했습니다')
                     }
